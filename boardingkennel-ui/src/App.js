@@ -13,13 +13,9 @@ function App() {
         <div className="App-header">
           <Navbar bg="dark" variant="dark" expanded="true" expand="lg" fixed="top">
             <Navbar.Brand href="/">Boarding Kennel</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Link href="/checkin">Check-in Dog</Nav.Link>
-            </Nav>
           </Navbar>
           <div className="component">
             <Route path="/" exact component={Home} />
-            <Route path="/checkin" component={CheckIn} />
           </div>
         </div>
       </Router>
