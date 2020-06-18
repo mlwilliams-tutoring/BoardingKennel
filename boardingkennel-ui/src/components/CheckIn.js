@@ -52,7 +52,7 @@ class CheckIn extends Component {
         //     'kennelSize': this.state.kennelSize.toUpperCase()
         // };
 
-        // this.resetState();
+        this.resetState();
         // Utils.post("addDog", postData);
     }
 
@@ -107,12 +107,14 @@ class CheckIn extends Component {
                                 type='radio'
                                 id='yes-fed'
                                 label={`Yes`}
+                                checked={this.state.isFed}
                             />
                             <FormCheck inline onChange={this.onRadioChange}
                                 name='isFed'
                                 type='radio'
                                 id='no-fed'
                                 label={`No`}
+                                checked={!this.state.isFed}
                             />
                         </div>
                     </Form.Group>
