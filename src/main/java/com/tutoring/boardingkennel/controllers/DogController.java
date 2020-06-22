@@ -17,7 +17,6 @@ public class DogController {
 
     @PostMapping(path = "/addDog", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Dog> addDog(@RequestBody Dog dog) {
-
         dogService.save(dog);
         return new ResponseEntity(dog, HttpStatus.CREATED);
     }
