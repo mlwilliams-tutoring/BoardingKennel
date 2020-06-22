@@ -41,19 +41,19 @@ class CheckIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault(); //keeps page from refreshing
         console.log(this.state);
-        // let postData = {
-        //     'breed': this.state.breed,
-        //     'age': parseInt(this.state.age.charAt(0)),
-        //     'name': this.state.name,
-        //     'allergies': this.state.allergies,
-        //     'amountOfFood': parseInt(this.state.amountOfFood),
-        //     'amountFed': this.state.amountFed === 0 ? 0 : parseInt(this.state.amountFed),
-        //     'isFed': this.state.isFed,
-        //     'kennelSize': this.state.kennelSize.toUpperCase()
-        // };
+        let postData = {
+            'breed': this.state.breed,
+            'age': parseInt(this.state.age.charAt(0)),
+            'name': this.state.name,
+            'allergies': this.state.allergies,
+            'amountOfFood': parseInt(this.state.amountOfFood),
+            'amountFed': this.state.amountFed === 0 ? 0 : parseInt(this.state.amountFed),
+            'isFed': this.state.isFed,
+            'kennelSize': this.state.kennelSize.toUpperCase()
+        };
 
         this.resetState();
-        // Utils.post("addDog", postData);
+        Utils.post("addDog", postData);
     }
 
     resetState() {
