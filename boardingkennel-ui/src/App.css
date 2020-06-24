@@ -26,10 +26,13 @@
 }
 
 .component {
-  align-self: flex-start;
   padding-left: 15px;
   padding-top: 70px;
   padding-bottom: 15px;
+}
+
+.page-title {
+  margin-bottom: 20px;
 }
 
 .hidden { display:none; }
