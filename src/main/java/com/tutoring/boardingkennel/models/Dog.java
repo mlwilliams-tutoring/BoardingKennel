@@ -28,6 +28,8 @@ public class Dog {
     private boolean isFed;
     @Enumerated(EnumType.STRING)
     private KennelSize kennelSize;
+//    @ManyToOne
+//    BoardingFacility facility;
 
     public Dog(){
         this.allergies = "";
@@ -37,12 +39,13 @@ public class Dog {
     }
 
     public Dog(String breed, int age, String name, String allergies,
-               int amountOfFood, boolean isFed, KennelSize kennelSize){
+               int amountOfFood, int amountFed, boolean isFed, KennelSize kennelSize){
         this.breed = breed;
         this.age = age;
         this.name = name;
         this.allergies = allergies;
         this.amountOfFood = amountOfFood;
+        this.amountFed = amountFed; //amount of food given to dog today
         this.isFed = isFed;
         this.kennelSize = kennelSize;
         this.amountFed = 0;
@@ -51,40 +54,23 @@ public class Dog {
     /**
      * Prints out the dog's information
      */
-    public void printDogInformation() {
-        System.out.println(name + "'s breed is " + breed);
-        System.out.println(name + "'s age is " + age);
+    @Override
+    public String toString() {
+        String info = name + "'s breed is " + breed + "\n" +
+        name + "'s age is " + age + "\n";
         if (!allergies.isEmpty()) {
-            System.out.println(name + "'s allergies are: " + allergies);
+            info += name + "'s allergies are: " + allergies + "\n";
         } else {
-            System.out.println(name + " does not have any allergies.");
+            info += name + " does not have any allergies." + "\n";
         }
         if (isFed) {
-            System.out.println(name + " has been fed " + amountFed + " cups of food.");
+            info += name + " has been fed " + amountFed + " cups of food." + "\n";
         } else {
-            System.out.println(name + " is hungry!");
+            info += name + " is hungry!" + "\n";
         }
-        System.out.println(name + " is in kennel size " + kennelSize);
-    }
+        info += name + " is in kennel size " + kennelSize;
 
-    /**
-     * Feeds the dog the given amount of food.
-     * Will say the dog is fed when they have been
-     * given the amount of food they need
-     *
-     * @param amountOfFood
-     */
-    public void feedDog(int amountOfFood) {
-        if (isFed) {
-            System.out.println(name + " has already been fed");
-        } else {
-            System.out.println(name + " has been given "
-                    + amountOfFood + " cups of food");
-            amountFed = amountFed + amountOfFood;
-            if (amountFed >= this.amountOfFood) {
-                isFed = true;
-            }
-        }
+        return info;
     }
 
     public long getId() {
@@ -119,7 +105,7 @@ public class Dog {
         return amountFed;
     }
 
-    public boolean isFed() {
+    public boolean getIsFed() {
         return isFed;
     }
 
@@ -151,7 +137,7 @@ public class Dog {
         this.amountFed = amountFed;
     }
 
-    public void setFed(boolean fed) {
+    public void setIsFed(boolean fed) {
         isFed = fed;
     }
 

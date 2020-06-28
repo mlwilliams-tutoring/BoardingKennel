@@ -14,7 +14,7 @@ class CheckIn extends Component {
         amountOfFood: '',
         isFed: false,
         amountFed: '',
-        kennelSize: '',
+        kennelSize: 'Small',
         showAmountFed: false
     };
 
