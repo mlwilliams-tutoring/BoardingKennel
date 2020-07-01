@@ -38,6 +38,6 @@ public class BoardingFacilityController {
     @GetMapping(path = "/boardingDogs", consumes = "application/json", produces = "application/json")
     public ResponseEntity<List<Dog>> getAllDogs() {
         List<Dog> dogs = service.getBoardingDogs();
-        return new ResponseEntity(Collections.emptyList(), HttpStatus.OK);
+        return new ResponseEntity(dogs, HttpStatus.OK);
     }
 }
