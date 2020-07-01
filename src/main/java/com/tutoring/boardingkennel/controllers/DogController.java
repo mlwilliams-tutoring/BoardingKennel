@@ -20,4 +20,10 @@ public class DogController {
         dogService.save(dog);
         return new ResponseEntity(dog, HttpStatus.CREATED);
     }
+
+    @PostMapping(path = "/checkOutDog", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Dog> checkOutDog(@RequestBody Dog dog) {
+        dogService.delete(dog);
+        return new ResponseEntity(dog, HttpStatus.OK);
+    }
 }

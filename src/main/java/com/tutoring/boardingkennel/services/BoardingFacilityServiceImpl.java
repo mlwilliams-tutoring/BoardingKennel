@@ -1,12 +1,14 @@
 package com.tutoring.boardingkennel.services;
 
 import com.tutoring.boardingkennel.models.BoardingFacility;
+import com.tutoring.boardingkennel.models.Dog;
 import com.tutoring.boardingkennel.models.KennelSize;
 import com.tutoring.boardingkennel.repositories.BoardingFacilityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -59,5 +61,10 @@ public class BoardingFacilityServiceImpl implements BoardingFacilityService {
     @Override
     public void feedDogs() {
 
+    }
+
+    @Override
+    public List<Dog> getBoardingDogs() {
+        return dogService.getAllDogs();
     }
 }

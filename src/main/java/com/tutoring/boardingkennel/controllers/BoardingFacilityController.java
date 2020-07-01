@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -31,5 +33,11 @@ public class BoardingFacilityController {
 //        availability.put("largeKennelsAvailable", 5);
 //        availability.put("totalNumLargeKennels", 10);
         return new ResponseEntity(availability, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/boardingDogs", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<List<Dog>> getAllDogs() {
+        List<Dog> dogs = service.getBoardingDogs();
+        return new ResponseEntity(Collections.emptyList(), HttpStatus.OK);
     }
 }

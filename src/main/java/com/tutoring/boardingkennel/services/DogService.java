@@ -9,4 +9,7 @@ public interface DogService {
     void save(Dog dog);
     Dog findByName(String name);
     List<Dog> findByKennelSize(KennelSize kennelSize);
+    void delete(Dog dog);
+
+    List<Dog> getAllDogs();
 }

@@ -46,4 +46,13 @@ public class DogServiceImpl implements DogService {
             //update dog's amount fed and if they are full
         }
     }
+
+    public void delete(Dog dog) {
+        dogRepo.delete(dog);
+    }
+
+    @Override
+    public List<Dog> getAllDogs() {
+        return dogRepo.findAll();
+    }
 }

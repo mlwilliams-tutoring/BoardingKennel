@@ -1,5 +1,8 @@
 package com.tutoring.boardingkennel.services;
 
+import com.tutoring.boardingkennel.models.Dog;
+
+import java.util.List;
 import java.util.Map;
 
 public interface BoardingFacilityService {
@@ -11,4 +14,5 @@ public interface BoardingFacilityService {
 
     void feedDogs();
 
+    List<Dog> getBoardingDogs();
 }
