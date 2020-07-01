@@ -19,7 +19,6 @@ function App() {
           </Navbar>
           <div className="component">
             <Route path="/" exact component={Home} />
-            <Route path="/checkin" component={CheckIn} />
           </div>
         </div>
       </Router>
