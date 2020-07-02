@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Utils from './Utils';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import ClickCard from './ClickCard';
 
 class CheckOut extends Component {
     defaultState = {
@@ -19,21 +18,14 @@ class CheckOut extends Component {
                 this.setState({ boardingDogs: data });
             });
     }
-
-    renderDog = dog => {
-        return (
-            <div className="grid-item">
-                <Card bg="dark" border="darl">
-                    <Card.Body>
-                        <Card.Title>{dog.name}</Card.Title>
-                        <Card.Text>Dog Breed: {dog.breed}</Card.Text>
-                        <Card.Text>Dog Age: {dog.age}</Card.Text>
-                        <Card.Text>Dog Kennel Size: {dog.kennelSize}</Card.Text>
-                        <Button variant="primary">Check-out</Button>
-                    </Card.Body>
-                </Card>
-            </div>
-        );
+    checkout = dog => {
+        const postData = {
+            id: dog.id
+        }
+        Utils.post("checkOutDog", postData)
+            .then(data => {
+                this.setState({ boardingDogs: data });
+            });
     }
 
     render() {
@@ -41,7 +33,15 @@ class CheckOut extends Component {
             <div className="grid-page">
                 {
                     this.state.boardingDogs.map(dog => {
-                        return this.renderDog(dog);
+                        return (<ClickCard
+                            key={'dog-card' + dog.name}
+                            target={dog}
+                            title={dog.name}
+                            text={<span><span>{'Dog Breed: ' + dog.breed}<br /></span>
+                                <span>{'Dog Age: ' + dog.age}<br /></span>
+                                <span>{'Kennel Size: ' + dog.kennelSize}</span></span>}
+                            onButtonClick={this.checkout}
+                        />);
                     })
                 }
             </div>

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class DogController {
 
@@ -22,8 +24,9 @@ public class DogController {
     }
 
     @PostMapping(path = "/checkOutDog", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Dog> checkOutDog(@RequestBody Dog dog) {
+    public ResponseEntity<List<Dog>> checkOutDog(@RequestBody Dog dog) {
         dogService.delete(dog);
-        return new ResponseEntity(dog, HttpStatus.OK);
+        List<Dog> remainingDogs = dogService.getAllDogs();
+        return new ResponseEntity(remainingDogs, HttpStatus.OK);
     }
 }
