@@ -22,16 +22,6 @@ public class BoardingFacilityController {
     @GetMapping(path = "/availability", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Map<String, Integer>> getAvailability() {
         Map<String, Integer> availability = service.getAvailability();
-//        HashMap<String, Integer> availability = new HashMap<>();
-//        availability.put("numOfSmallDogs", 3);
-//        availability.put("smallKennelsAvailable", 17);
-//        availability.put("totalNumSmallKennels", 20);
-//        availability.put("numOfMedDogs", 12);
-//        availability.put("mediumKennelsAvailable", 3);
-//        availability.put("totalNumMedKennels", 15);
-//        availability.put("numOfLargeDogs", 5);
-//        availability.put("largeKennelsAvailable", 5);
-//        availability.put("totalNumLargeKennels", 10);
         return new ResponseEntity(availability, HttpStatus.OK);
     }
 
