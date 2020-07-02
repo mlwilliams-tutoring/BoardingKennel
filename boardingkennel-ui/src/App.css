@@ -45,6 +45,11 @@
   font-size: large;
 }
 
+.search-bar{
+  display: inline-block;
+  width: 50%;
+}
+
 .page-title {
   margin-bottom: 20px;
 }
