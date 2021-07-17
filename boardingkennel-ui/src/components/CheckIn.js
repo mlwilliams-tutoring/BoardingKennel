@@ -15,7 +15,8 @@ class CheckIn extends Component {
         isFed: false,
         amountFed: '',
         kennelSize: 'Small',
-        showAmountFed: false
+        showAmountFed: false,
+        errors: {}
     };
 
     constructor() {
@@ -40,7 +41,6 @@ class CheckIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault(); //keeps page from refreshing
-        console.log(this.state);
         let postData = {
             'breed': this.state.breed,
             'age': parseInt(this.state.age.charAt(0)),
@@ -52,8 +52,17 @@ class CheckIn extends Component {
             'kennelSize': this.state.kennelSize.toUpperCase()
         };
 
+        Utils.post("addDog", postData)
+            .then(data => {
+                if (data.hasOwnProperty('message')) {
+                    console.log(data)
+                } else {
+                    this.setState({ errors: data })
+                    return;
+                }
+
+            });
         this.resetState();
-        Utils.post("addDog", postData);
     }
 
     resetState() {
@@ -66,18 +75,31 @@ class CheckIn extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="DogName">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type="input" name="name"
-                            value={this.state.name} onChange={this.onChange} />
+                        <Form.Control type="input"
+                            name="name"
+                            value={this.state.name}
+                            onChange={this.onChange}
+                            isInvalid={!!this.state.errors.name} />
+                        <Form.Control.Feedback type="invalid">
+                            {this.state.errors.name}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="DogBreed">
                         <Form.Label>Breed</Form.Label>
-                        <Form.Control type="input" name="breed"
-                            value={this.state.breed} onChange={this.onChange} />
+                        <Form.Control type="input"
+                            name="breed"
+                            value={this.state.breed}
+                            onChange={this.onChange}
+                            isInvalid={!!this.state.errors.breed} />
+                        <Form.Control.Feedback type="invalid">
+                            {this.state.errors.breed}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="DogAgeSelect">
                         <Form.Label>Age</Form.Label>
                         <Form.Control as="select" name="age"
-                            value={this.state.age} onChange={this.onChange}>
+                            value={this.state.age} onChange={this.onChange}
+                            isInvalid={!!this.state.errors.age}>
                             <option>0 years</option>
                             <option>1 year</option>
                             <option>2 years</option>
@@ -88,6 +110,9 @@ class CheckIn extends Component {
                             <option>7 years</option>
                             <option>7+ years</option>
                         </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            {this.state.errors.age}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="DogAllergies">
                         <Form.Label>Allergies (Food and Medication)</Form.Label>
@@ -97,7 +122,11 @@ class CheckIn extends Component {
                     <Form.Group controlId="DogFoodReqs">
                         <Form.Label>How much food does the dog eat in cups?</Form.Label>
                         <Form.Control type="input" name="amountOfFood"
-                            value={this.state.amountOfFood} onChange={this.onChange} />
+                            value={this.state.amountOfFood} onChange={this.onChange}
+                            isInvalid={!!this.state.errors.amountOfFood} />
+                        <Form.Control.Feedback type="invalid">
+                            {this.state.errors.amountOfFood}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Has your dog been fed today?</Form.Label>
@@ -108,6 +137,7 @@ class CheckIn extends Component {
                                 id='yes-fed'
                                 label={`Yes`}
                                 checked={this.state.isFed}
+                                isInvalid={!!this.state.errors.isFed}
                             />
                             <FormCheck inline onChange={this.onRadioChange}
                                 name='isFed'
@@ -115,8 +145,12 @@ class CheckIn extends Component {
                                 id='no-fed'
                                 label={`No`}
                                 checked={!this.state.isFed}
+                                isInvalid={!!this.state.errors.isFed}
                             />
                         </div>
+                        <Form.Control.Feedback type="invalid">
+                            {this.state.errors.isFed}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="DogFoodAlreadyFed"
                         className={this.state.showAmountFed ? '' : 'hidden'}>
@@ -127,11 +161,15 @@ class CheckIn extends Component {
                     <Form.Group>
                         <Form.Label>Kennel Size</Form.Label>
                         <Form.Control as="select" name="kennelSize"
-                            value={this.state.kennelSize} onChange={this.onChange}>
+                            value={this.state.kennelSize} onChange={this.onChange}
+                            isInvalid={!!this.state.errors.kennelSize}>
                             <option>Small</option>
                             <option>Medium</option>
                             <option>Large</option>
                         </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            {this.state.errors.kennelSize}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Submit

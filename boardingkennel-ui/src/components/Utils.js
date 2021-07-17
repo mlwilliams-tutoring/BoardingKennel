@@ -7,9 +7,15 @@ export default class Utils {
       },
       body: JSON.stringify(postData),
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          return response.json()
+        } else {
+          return { message: "Request was Successful" }
+        }
+      })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error: ', error);
       }));
   }
 
